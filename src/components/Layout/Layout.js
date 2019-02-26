@@ -4,7 +4,6 @@ import classes from './Layout.css'
 
 import Toolbar from '../Navigation/Toolbar/Toolbar'
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer'
-import { runInThisContext } from 'vm';
 
 class Layout extends Component {
     state = {
