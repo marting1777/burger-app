@@ -97,28 +97,37 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        this.setState({loading: true})
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'Martin Galli',
-                address: {
-                    street: 'Avenida Peron 7245',
-                    zipCode: '1621',
-                    country: 'Argentina'
-                },
-                email: 'martin_galli13@hotmail.com'
-            },
-            deliveryMethod: 'Fastest'
+        // this.setState({loading: true})
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.totalPrice,
+        //     customer: {
+        //         name: 'Martin Galli',
+        //         address: {
+        //             street: 'Avenida Peron 7245',
+        //             zipCode: '1621',
+        //             country: 'Argentina'
+        //         },
+        //         email: 'martin_galli13@hotmail.com'
+        //     },
+        //     deliveryMethod: 'Fastest'
+        // }
+        // axios.post('/orders.json', order)
+        //     .then(response => {
+        //         this.setState({loading: false, purchasing: false})
+        //     })
+        //     .catch(e => {
+        //         this.setState({loading: false, purchasing: false})
+        //     })
+        const queryParams = []
+        for (let i in this.state.ingredients) {
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
         }
-        axios.post('/orders.json', order)
-            .then(response => {
-                this.setState({loading: false, purchasing: false})
-            })
-            .catch(e => {
-                this.setState({loading: false, purchasing: false})
-            })
+        const queryString = queryParams.join('&')
+        this.props.history.push({
+            pathname: '/checkout',
+            search: `?${queryString}`
+        })
     }
 
     render () {
